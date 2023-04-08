@@ -1,23 +1,23 @@
 {
-  "name": "kamui",
+  "name": "Kamui",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@reach/dialog": "^0.18.0",
-    "@tailwindcss/typography": "^0.5.9",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
+    "@reach/dialog": "^0.16.2",
+    "@tailwindcss/typography": "^0.5.1",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "firebase": "^9.19.1",
-    "react": "^18.2.0",
-    "react-beautiful-dnd": "^13.1.1",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.7.1",
-    "react-markdown": "^8.0.5",
-    "react-router-dom": "^6.8.0",
-    "react-scripts": "5.0.1",
+    "firebase": "^8.10.1",
+    "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
+    "react-markdown": "^8.0.0",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
     "remark-gfm": "^3.0.1",
-    "uuid": "^9.0.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -45,8 +45,8 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.13",
-    "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.4"
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.0.18"
   }
 }

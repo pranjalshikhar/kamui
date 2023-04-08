@@ -1,6 +1,5 @@
 module.exports = {
-  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-  darkMode: false,
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   theme: {
     extend: {
       colors: {
@@ -11,10 +10,10 @@ module.exports = {
         270: "270px",
         220: "220px",
       },
+      backgroundImage: {
+        dashboard: "url('/src/assets/dashboard-illustration.svg')",
+      },
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
 };

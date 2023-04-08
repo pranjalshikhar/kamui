@@ -25,18 +25,12 @@ const Column = ({
       .update({ order: firebase.firestore.FieldValue.arrayRemove(colId) });
 
     db.collection(`users/${userId}/boards/${boardId}/columns`)
-      .doc("columnOrder")
-      .update({ order: firebase.firestore.FieldValue.arrayRemove(colId) });
-
-    db.collection(`users/${userId}/boards/${boardId}/columns`)
       .doc(colId)
       .delete();
 
-    // extract and delete its tasks
-    tasks.forEach((task) => {
-      db.collection(`users/${userId}/boards/${boardId}/tasks`)
-        .doc(task)
-        .delete();
+    //Extract and delete its tasks
+    tasks.forEach((t) => {
+      db.collection(`users/${userId}/boards/${boardId}/tasks`).doc(t).delete();
     });
   };
 
@@ -123,7 +117,7 @@ const Column = ({
             <Modal
               modal={modal}
               setModal={setModal}
-              ariaText="Column Delete configuration"
+              ariaText="Column Delete confirmation"
             >
               <div className="md:px-12">
                 <div className="text-yellow-600 mb-2">
@@ -133,12 +127,12 @@ const Column = ({
                   Are you sure you want to delete this column?
                 </h2>
                 <h3 className="text-red-600 text-sm md:text-lg">
-                  This column and it's tasks will be permanently deleted and it
+                  This column and its tasks will be permanently deleted and it
                   cannot be undone.
                 </h3>
                 <div className="my-8 flex">
                   <button
-                    className="border border-red-700 text-red-600 px-2 py-1 rounded-sm mr-4 text-sm"
+                    className="border border-red-700 text-red-600 px-2 py-1 rounded-sm mr-4 text-sm md:text-base"
                     onClick={() => deleteCol(column.id, tasks)}
                   >
                     Yes, delete
@@ -147,7 +141,7 @@ const Column = ({
                     className="bg-blue-800 text-gray-100 px-2 py-1 rounded-sm text-sm md:text-base"
                     onClick={() => setModal(false)}
                   >
-                    No, go back!
+                    No, go back
                   </button>
                 </div>
               </div>

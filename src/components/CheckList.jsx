@@ -1,8 +1,8 @@
-import { useRef, useState } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
-import { db, firebase } from "../lib/firebase";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Checked, Unchecked, Cross, Dragger } from "./Icons";
+import { firebase, db } from "../lib/firebase";
+import { useState, useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const CheckList = ({ todos, taskId, boardId, userId }) => {
   const [todoList, setList] = useState(todos);
@@ -103,7 +103,7 @@ const CheckList = ({ todos, taskId, boardId, userId }) => {
           )}
         </Droppable>
       </DragDropContext>
-      <imput
+      <input
         maxLength="40"
         ref={newTaskRef}
         type="text"

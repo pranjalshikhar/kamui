@@ -1,9 +1,10 @@
 import React from "react";
 import { AiOutlineGoogle } from "react-icons/ai";
 import { FiUser } from "react-icons/fi";
-import kanbanImage from "../assets/kanban.svg";
 
-const Authenticate = ({ loginWithGoogle, signInAnon }) => {
+import kanbanImage from "../assets/kanban.jpg";
+
+export default function Authenticate({ loginWithGoogle, signInAnon }) {
   return (
     <>
       <section className="px-4 py-24 mx-auto max-w-7xl">
@@ -16,39 +17,36 @@ const Authenticate = ({ loginWithGoogle, signInAnon }) => {
           </h1>
           <p className="px-0 mb-6 text-lg text-gray-500 md:text-xl lg:px-24">
             <span className="font-bold">Kamui</span> is a free and powerful, yet
-            simplified Kanban scheduler with superpowers for everyone. 🚀🔥 Get
-            more done in less time. ⏱️
+            simplified Kanban scheduler with superpwers for everyone. 🚀🔥 Get
+            more done in less time ⏱️
           </p>
           <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
             <button
               onClick={loginWithGoogle}
-              className="inline-flex justify-evenly items-center w-36 p-3 rounded-md mb-2 btn btn-primary btn-lg sm:mb-0 mr-2 transition-colors duration-200 transform bg-blue-600 hober:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 text-white uppercase font-semibold"
+              className="inline-flex justify-evenly items-center w-36 p-3 rounded-md mb-2 btn btn-primary btn-lg  sm:mb-0 mr-2 transition-colors duration-200 transform bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 text-white uppercase font-semibold"
             >
               <AiOutlineGoogle /> Google
             </button>
             <button
               onClick={signInAnon}
-              className="inline-flex justify-evenly items-center w-36 p-3 rounded-md mb-2 btn btn-primary btn-lg sm:mb-0 mr-2 transition-colors duration-200 transform bg-blue-600 hober:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 text-white uppercase font-semibold"
+              className="inline-flex items-center w-36 p-3 rounded-md justify-evenly mb-2 btn btn-primary btn-lg  sm:mb-0 mr-2 transition-colors duration-200 transform bg-blue-600 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 text-white uppercase font-semibold"
             >
-              Guest
+              <FiUser /> Guest
             </button>
           </div>
-          <p className="text-gray-500 font-medium">
+          <p className="text-gray-500  font-medium">
             {" "}
-            <sup>*</sup>
-            Data for guest users will be cleared after log out.
+            <sup>*</sup>Data for guest users will be cleared after log out
           </p>
         </div>
         <div className="w-full mx-auto mt-20 text-center md:w-10/12">
           <img
             src={kanbanImage}
             alt="kanban-board"
-            className="w-full rounded-lg shadow-2xl"
+            className="w-full rounded-lg shadow-xl"
           />
         </div>
       </section>
     </>
   );
-};
-
-export default Authenticate;
+}

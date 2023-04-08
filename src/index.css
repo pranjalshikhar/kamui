@@ -4,14 +4,10 @@
 
 @layer components {
   .select {
-    @apply px-1 py-1 mr-3 outline-none bg-gray-300 rounded-sm hover:bg-gray-400;
+    @apply px-1 py-2 mr-3 outline-none bg-gray-300 rounded-sm hover:bg-gray-400;
   }
+
   .option {
     @apply bg-gray-200 outline-none my-6 border-none py-3;
   }
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }

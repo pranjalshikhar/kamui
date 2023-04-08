@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import useKanbanData from "../hooks/useKanbanData";
+import { useState } from "react";
+import { useParams } from "react-router-dom";
+
+import loader from "../assets/loader.gif";
+
+import { FaGithub } from "react-icons/fa";
+
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
 import { db, firebase } from "../lib/firebase";
-import { debounce } from "../lib/utils";
+import { Link } from "react-router-dom";
+import Column from "../components/Column";
 import Modal from "../components/Modal";
 import AddTask from "../pages/AddTask";
-import { FaGitHub } from "react-icons/fa";
-import { Add } from "../components/Icon";
-import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import Column from "../components/Column";
-import loader from "../assets/loader.gif";
+import { Add } from "../components/Icons";
+
+import useKanbanData from "../hooks/useKanbanData";
+import { debounce } from "../lib/utils";
 
 const Kanban = ({ userId }) => {
   const { boardId } = useParams();
@@ -50,22 +56,21 @@ const Kanban = ({ userId }) => {
         db.collection(`users/${userId}/boards/${boardId}/columns`)
           .doc(startColumn.id)
           .update({ taskIds: newTaskIds });
-
         return;
       }
 
-      const startTaskIds = Array.from(startColumn.taskIds);
-      startTaskIds.splice(source.index, 1);
+      const startTaskIDs = Array.from(startColumn.taskIds);
+      startTaskIDs.splice(source.index, 1);
       const newStart = {
         ...startColumn,
-        taskIds: startTaskIds,
+        taskIds: startTaskIDs,
       };
 
-      const finishTaskIds = Array.from(endColumn.taskIds);
-      finishTaskIds.splice(destination.index, 0, draggableId);
+      const finishTaskIDs = Array.from(endColumn.taskIds);
+      finishTaskIDs.splice(destination.index, 0, draggableId);
       const newFinish = {
         ...endColumn,
-        taskIds: finishTaskIds,
+        taskIds: finishTaskIDs,
       };
 
       const newState = {
@@ -81,17 +86,16 @@ const Kanban = ({ userId }) => {
 
       db.collection(`users/${userId}/boards/${boardId}/columns`)
         .doc(newStart.id)
-        .update({ taskIds: startTaskIds });
+        .update({ taskIds: startTaskIDs });
 
       db.collection(`users/${userId}/boards/${boardId}/columns`)
         .doc(newFinish.id)
-        .update({ taskIds: finishTaskIds });
+        .update({ taskIds: finishTaskIDs });
     } else {
       const newColumnOrder = Array.from(initialData.columnOrder);
       newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, draggableId);
       setInitialData({ ...initialData, columnOrder: newColumnOrder });
-
       db.collection(`users/${userId}/boards/${boardId}/columns`)
         .doc("columnOrder")
         .update({ order: newColumnOrder });
@@ -114,8 +118,8 @@ const Kanban = ({ userId }) => {
     e.target.elements.newCol.value = "";
   };
 
-  const changeBoardName = debounce((e) => {
-    db.collection(`users/${userId}/boards/`).doc(boardId).update({ name: e });
+  const changeBoardName = debounce((ev) => {
+    db.collection(`users/${userId}/boards`).doc(boardId).update({ name: ev });
   }, 7000);
 
   return (
@@ -130,18 +134,19 @@ const Kanban = ({ userId }) => {
               close={() => setModal(false)}
             />
           </Modal>
+
           <main className="pb-2 h-screen w-screen bg-white">
             <div className="flex flex-col h-full">
-              <header className="z-10 text-sm sm:text-base py-5 mx-3 md:mx-6">
+              <header className=" z-10 text-sm sm:text-base py-5 mx-3 md:mx-6">
                 <div className="flex flex-wrap justify-between items-center">
                   <span className="text-xl">
                     <Link
                       to="/"
-                      className="text-blue-800 hover:text-blue-500 uppercase font-semibold"
+                      className="text-blue-500 hover:text-blue-700 uppercase font-semibold"
                     >
                       Boards{" "}
                     </Link>
-                    <span className=""></span>
+                    <span className="">/</span>
                     <input
                       type="text"
                       defaultValue={boardName}
@@ -150,7 +155,7 @@ const Kanban = ({ userId }) => {
                     />
                   </span>
                   <div className="flex flex-wrap items-center sm:space-x-9">
-                    <div className="flex items-center mt-2 sm:mt-0">
+                    <div className="flex items-center mt-2 sm:mt-0 ">
                       <h3 className="text-gray-500 mr-2 uppercase">
                         Filter Priority:{" "}
                       </h3>
@@ -158,7 +163,7 @@ const Kanban = ({ userId }) => {
                         {filters.map((f) => (
                           <div
                             key={f}
-                            className={`px-3 border-black py-1 hover:bg-blue-600 hover:text-blue-50 cursor-pointer capitalize ${
+                            className={`px-3  border-black py-1 hover:bg-blue-600 hover:text-blue-50 cursor-pointer capitalize ${
                               filter === f ? "bg-blue-600 text-blue-50" : ""
                             }`}
                             onClick={() => setFilter(f === "all" ? null : f)}
@@ -176,13 +181,18 @@ const Kanban = ({ userId }) => {
                         ) : null}
                       </div>
                     </div>
-                    <div className="flex items-center text-blue-900 hover:bg-blue-600 hover:text-blue-50 bg-transparent transition duration-200 cursor-pointer hover:scale-110 rounded-sm px-2 py-1 mr-3 hidden sm:flex text-2xl">
-                      <a href="github.com" target="_blank" rel="noreferrer">
-                        <FaGitHub />
+
+                    <div className="flex items-center text-blue-900 hover:bg-blue-600 hover:text-blue-50 bg-transparent transition duration-200 cursor-pointer hover:scale-110 rounded-sm px-2 py-1 mr-3 sm:flex text-2xl">
+                      <a
+                        href="https://github.com/lucky-chap/Kamui"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <FaGithub />
                       </a>
                     </div>
                     <div
-                      className="text-white bg-gradient-to-br from-primary via-indigo-600 to-blue-600 transform hover:scale-110 transition-all duration-300 rounded-full p-2 sm:p-1 fixed bottom-6 right-6 sm:static"
+                      className="text-white bg-blue-500 transform hover:scale-110 transition-all duration-300 rounded-full p-2 sm:p-1 fixed bottom-6 right-6 sm:static"
                       onClick={() => setModal(true)}
                     >
                       <Add />
@@ -190,6 +200,7 @@ const Kanban = ({ userId }) => {
                   </div>
                 </div>
               </header>
+
               <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable
                   droppableId="allCols"
@@ -226,11 +237,11 @@ const Kanban = ({ userId }) => {
                         className="ml-2"
                       >
                         <input
-                          type="text"
                           maxLength="20"
+                          className="truncate bg-transparent placeholder-indigo-500 text-indigo-800 bg-indigo-50 px-2 outline-none py-1 rounded-sm ring-2 focus:ring-indigo-500"
+                          type="text"
                           name="newCol"
                           placeholder="Add a new column"
-                          className="truncate bg-transparent placeholder-indigo-800 bg-indigo-50 px-2 outline-none py-1 rounded-sm ring-2 focus:ring-indigo-500"
                         />
                       </form>
                     </div>

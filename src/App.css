@@ -24,18 +24,20 @@ progress::-moz-progress-bar {
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
+  width: 10px; /* width of the entire scrollbar */
 }
 
 *::-webkit-scrollbar-track {
-  background: white;
+  background: white; /* color of the tracking area */
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.15);
-  border-radius: 20px;
-  border: 2px solid white;
+  background-color: rgba(0, 0, 0, 0.15); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 2px solid white; /* creates padding around scroll thumb */
 }
+
+/* Reach UI Modal */
 
 :root {
   --reach-dialog: 1;
@@ -57,6 +59,7 @@ progress::-moz-progress-bar {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0px);
@@ -95,7 +98,7 @@ progress::-moz-progress-bar {
   -ms-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-animation: load6 1.7s infinite ease, round 1.7s infinite ease;
-  animation: load6 1.7s infinte ease, round 1.7s infinte ease;
+  animation: load6 1.7s infinite ease, round 1.7s infinite ease;
 }
 
 @-webkit-keyframes load6 {
@@ -129,7 +132,6 @@ progress::-moz-progress-bar {
       0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
 }
-
 @keyframes load6 {
   0% {
     box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
@@ -161,7 +163,6 @@ progress::-moz-progress-bar {
       0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
   }
 }
-
 @-webkit-keyframes round {
   0% {
     -webkit-transform: rotate(0deg);
@@ -172,7 +173,6 @@ progress::-moz-progress-bar {
     transform: rotate(360deg);
   }
 }
-
 @keyframes round {
   0% {
     -webkit-transform: rotate(0deg);
@@ -182,4 +182,10 @@ progress::-moz-progress-bar {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.dashboard {
+  background-image: url("../src/assets/dashboard-illustration.svg");
+  background-position: center;
+  background-repeat: no-repeat;
 }

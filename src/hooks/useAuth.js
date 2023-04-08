@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { firebase, db } from "../lib/firebase";
+
 import { createBoardForAnons } from "../lib/utils";
 
 const useAuth = () => {
@@ -9,10 +10,10 @@ const useAuth = () => {
   const loginWithGoogle = async () => {
     try {
       const provider = new firebase.auth.GoogleAuthProvider();
-      await firebase.auth().signInWithPopup(provider);
+      await firebase.auth().signInWithRedirect(provider);
       setError(null);
     } catch (err) {
-      console.error(err);
+      console.log(err);
       setError(err.message);
     }
   };
@@ -22,7 +23,6 @@ const useAuth = () => {
       .auth()
       .signInAnonymously()
       .then((user) => {
-        console.log("Welcome Anon");
         createBoardForAnons(user.user.uid);
       });
   };
@@ -35,19 +35,13 @@ const useAuth = () => {
     return firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        db.collection("users").doc(user.uid).set(
-          {
-            id: user.uid,
-            name: user.displayName,
-            email: user.email,
-          },
-          {
-            merge: true,
-          }
-        );
-      } else {
-        setUser(false);
-      }
+        db.collection("users")
+          .doc(user.uid)
+          .set(
+            { id: user.uid, name: user.displayName, email: user.email },
+            { merge: true }
+          );
+      } else setUser(false);
     });
   }, [user]);
 

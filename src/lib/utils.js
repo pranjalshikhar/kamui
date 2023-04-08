@@ -1,21 +1,27 @@
-import { db } from "./firebase";
+import { db } from "../lib/firebase";
 import { Low, Medium, High } from "../components/Icons";
 
 export const extractPriority = (priority) => {
   switch (priority) {
-    case "low":
+    case "low": {
       return <Low />;
-    case "medium":
+    }
+
+    case "medium": {
       return <Medium />;
-    case "high":
+    }
+
+    case "high": {
       return <High />;
+    }
+
     default:
       return null;
   }
 };
 
 // Debouncing is a programming practice used to ensure that time-consuming tasks
-// do not fire so onafterprint, that it stall the performance of the web page.
+// do not fire so often, that it stalls the performance of the web page.
 // In other words, it limits the rate at which a function gets invoked
 export const debounce = (callback, wait) => {
   let timeoutId = null;
@@ -31,23 +37,25 @@ export const createBoardForAnons = (userId) => {
   const tasks = [
     {
       id: "1",
-      title: "Welcome to Kamui ♨️",
+      title: "Welcome to Kamui 🚀❤️🙌",
       description:
         "Kamui is an efficient kanban scheduler that focuses on speed, usability and beauty.",
       priority: "low",
       dateAdded: new Date(),
       todos: [],
     },
+
     {
       id: "2",
       title:
-        "With Kamui, you can add description to kanban boards for easier reference.",
+        "WIth Kamui, you can add descriptions to kanban boards for easier reference.",
       description:
-        "## Kamui supports MArkdown too!\n- Kamui fully supports GitHub flavoured MArkdown.\n- You can do **bold** and *italic*.\n ```\n You can write code too!\n```\n>Pretend this is a great quote.\nTo learn more about Markdown, visit [here](https://commonmark.org/help)",
+        "## Kamui supports Markdown too!\n- Kamui fully supports Github flavoured Markdown.\n- You can do **bold** and *italic*.\n ```\n You can write code too!\n```\n>Pretend this is a great quote.\nTo learn more about Markdown, visit [here](https://commonmark.org/help/).",
       priority: "high",
       dateAdded: new Date(),
       todos: [],
     },
+
     {
       id: "3",
       title:
@@ -57,41 +65,45 @@ export const createBoardForAnons = (userId) => {
       dateAdded: new Date(),
       todos: [],
     },
+
     {
       id: "4",
-      title: "Big tasks? Don't NoWorkResult, Kamui can make them simple.",
+      title: "Big tasks? Don'nt worry, Kamui can make them simple",
       description:
-        "Remeber to make these steps actionable, achievable and small",
+        "Remember to make these steps actionable, achievable and small.",
       priority: "medium",
       dateAdded: new Date(),
       todos: [
         { id: 1, task: "First subtask", done: false },
-        { id: 3, task: "Add another", done: true },
+        { id: 3, task: "And another", done: true },
         { id: 2, task: "You can reorder these too!", done: false },
       ],
     },
+
     {
       id: "5",
       title: "Tasks can be prioritized. Low, Medium or High",
-      description: "- high\n- Medium\n- Low",
-      priority: "medium",
+      priority: "low",
       todos: [],
+      description: "- High\n- Medium\n- Low",
     },
+
     {
       id: "6",
-      title: "Wanna know how I built this? Check these resources 🤯",
-      description:
-        "### Tell me your suggestions, feedback or anything at all!\n[This](http://github.com/pranjalshikhar/kamui) is the link to the Github repo. Drop a 🌟 if you like it. \n**Keep a beginner motivated**.\n **Resources:** \n[Jira-Clone](https://github.com/oldboyxx/jira_clone), \n[Personal-Kanban](https://github.com/nishantpainter/personal-kanban), \n[Zaytri](https://github.com/zaytri/react-kanban)",
+      title: "Wanna know how I built this? Check these resources 😊",
       priority: "medium",
       todos: [],
+      description:
+        "### Tell me your suggestions, feedback or anything at all!\n[This](http://github.com/luck-chap/Kamui) is the link to the Github repo. Drop a 🌟 if you like it. \n**Keep a beginner motivated**.\n **Resources:** \n[Jira-Clone](https://github.com/oldboyxx/jira_clone), \n[Personal-Kanban](https://github.com/nishantpainter/personal-kanban), \n[Zaytri](https://github.com/zaytri/react-kanban)",
     },
+
     {
       id: "7",
       title:
-        "Wanna change a column name? Just click on it and type your new name. Hit enter when done.",
-      description: "",
+        "Wanna change a column name? Just click on it and type your new name. Hit Enter when done 😊",
       priority: "low",
       todos: [],
+      description: "",
     },
   ];
 

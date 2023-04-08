@@ -21,11 +21,10 @@ const useBoards = (userId) => {
                 );
                 setBoards(documents);
               });
-          } else {
-            return;
-          }
-        } catch (err) {
-          console.error(err);
+          } else return;
+        } catch (e) {
+          console.log(e);
+          return null;
         }
       });
   }, [userId]);
